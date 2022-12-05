@@ -3,9 +3,11 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 // import { UserContext } from "./components/contexts";
 import * as React from "react";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Button, CssBaseline, ThemeProvider } from "@mui/material";
 import Nav from "./components/Nav";
 import { appTheme } from "./themes/theme";
+import Reviews from "./components/Reviews";
+import Header from "./components/Header";
 
 function App() {
   // const [user, setUser] = useState("");
@@ -17,8 +19,9 @@ function App() {
           <CssBaseline enableColorScheme />
           {/* <UserContext.Provider value={{ user, setUser }}> */}
           <div className="App">
-            <header className="App-header"></header>
-            <Nav />
+            {/* <Nav />
+            <Header />
+            <Reviews /> */}
           </div>
           {/* </UserContext.Provider> */}
         </ThemeProvider>
