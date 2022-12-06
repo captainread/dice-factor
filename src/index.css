@@ -26,3 +26,42 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+#home-page {
+  background-color: #f6efd9;
+  padding: 1rem;
+}
+
+#highlight {
+  background-color: white;
+  min-height: 300px;
+  padding: 1rem;
+}
+
+#highlight h1 {
+  text-align: left;
+  font-size: 230%;
+}
+
+#hightlight-btn-div {
+  float: right;
+}
+
+#categories-page {
+  background-color: #f6efd9;
+  padding: 1rem;
+  height: 80vh;
+}
+
+.review-card {
+  /* height: 10%; */
+  overflow:auto;
+}
+
+.review-card img {
+  height: 100px;
+}
+
+.read-more {
+  float: right;
+}

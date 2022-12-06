@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,7 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import trLogo from "../assets/DF-logo-trans.png";
 
-const pages = ["All Reviews", "Categories", "About"];
+const pages = ["Reviews", "Categories", "About"];
 const settings = ["Profile", "Logout"];
 
 function Nav() {
@@ -37,7 +38,7 @@ function Nav() {
   };
 
   return (
-    <AppBar color="secondary" position="static" sx={{ padding: 0.5}}>
+    <AppBar color="secondary" position="static" sx={{ padding: 0.5 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ height: 80 }}>
           {/* menu icon on phone */}
@@ -71,26 +72,32 @@ function Nav() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                <Link to={`/api/${page}`}>
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
 
           {/* my logo */}
-          <img src={trLogo} id="logo" alt="Dice Factor logo" />
+          <Link to="/">
+            <img src={trLogo} id="logo" alt="Dice Factor logo" />
+          </Link>
 
           {/* page names on desktop */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
+              <Link to={`/api/${page}`}>
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              </Link>
             ))}
           </Box>
 

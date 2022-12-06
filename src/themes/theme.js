@@ -11,12 +11,12 @@ export const appTheme = createTheme({
       contrastText: "#3e2f34",
     },
 
-    custom: {
-      light: "#ffa726",
-      main: "#f57c00",
-      dark: "#ef6c00",
-      contrastText: "rgba(0, 0, 0, 0.87)",
-    },
+    // custom: {
+    //   light: "#ffa726",
+    //   main: "#f57c00",
+    //   dark: "#ef6c00",
+    //   contrastText: "rgba(0, 0, 0, 0.87)",
+    // },
 
     contrastThreshold: 3,
     tonalOffset: 0.2,
