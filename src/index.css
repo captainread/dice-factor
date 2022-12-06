@@ -55,7 +55,7 @@ body {
 
 .review-card {
   /* height: 10%; */
-  overflow:auto;
+  overflow: auto;
 }
 
 .review-card img {
@@ -64,4 +64,18 @@ body {
 
 .read-more {
   float: right;
+}
+
+.loading-wrap {
+  border-radius: 2em;
+  padding: 2rem;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.loading {
+  margin: auto;
 }

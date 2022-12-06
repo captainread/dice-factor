@@ -72,8 +72,8 @@ function Nav() {
               }}
             >
               {pages.map((page) => (
-                <Link to={`/api/${page}`}>
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <Link key={page} to={`/api/${page}`}>
+                  <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 </Link>
@@ -89,7 +89,7 @@ function Nav() {
           {/* page names on desktop */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Link to={`/api/${page}`}>
+              <Link key={page} to={`/api/${page}`}>
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
