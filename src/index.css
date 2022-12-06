@@ -79,3 +79,40 @@ body {
 .loading {
   margin: auto;
 }
+
+#review-details-page {
+  padding: 1rem;
+  margin: auto;
+  display: block;
+  max-width: 800px;
+}
+
+#review-details-header {
+  /* background: palevioletred; */
+  overflow: auto;
+}
+
+#review-details-header h2 {
+  float: left;
+}
+
+#review-details-header h3 {
+  float: right;
+}
+
+#review-details-body {
+  text-align: left;
+  line-height: 1.5rem;
+}
+
+#review-details-body img {
+  margin: auto;
+  display: block;
+  width: 100%;
+  max-width: 800px;
+}
+
+#review-details-game {
+  overflow: auto;
+  margin: 0.5rem;
+}
