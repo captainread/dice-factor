@@ -1,13 +1,16 @@
 import "./index.css";
-// import { useState } from "react";
-import { BrowserRouter } from "react-router-dom";
-// import { UserContext } from "./components/contexts";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import * as React from "react";
-import { Button, CssBaseline, ThemeProvider } from "@mui/material";
-import Nav from "./components/Nav";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { appTheme } from "./themes/theme";
+// import { useState } from "react";
+// import { UserContext } from "./components/contexts";
+
+import Nav from "./components/Nav";
+import Home from "./components/Home";
 import Reviews from "./components/Reviews";
-import Header from "./components/Header";
+import Review from "./components/Review";
+import Categories from "./components/Categories";
 
 function App() {
   // const [user, setUser] = useState("");
@@ -19,9 +22,13 @@ function App() {
           <CssBaseline enableColorScheme />
           {/* <UserContext.Provider value={{ user, setUser }}> */}
           <div className="App">
-            {/* <Nav />
-            <Header />
-            <Reviews /> */}
+            <Nav />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/api/reviews" element={<Reviews />} />
+              <Route path="/api/categories" element={<Categories />} />
+              <Route path="/api/reviews/:review_id" element={<Review />} />
+            </Routes>
           </div>
           {/* </UserContext.Provider> */}
         </ThemeProvider>
