@@ -9,8 +9,10 @@ import { appTheme } from "./themes/theme";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Reviews from "./components/Reviews";
-import Review from "./components/Review";
+import ReviewDetails from "./components/ReviewDetails";
 import Categories from "./components/Categories";
+import Breadcrumb from "./components/Breadcrumb";
+
 
 function App() {
   // const [user, setUser] = useState("");
@@ -23,11 +25,15 @@ function App() {
           {/* <UserContext.Provider value={{ user, setUser }}> */}
           <div className="App">
             <Nav />
+            {/* <Breadcrumb /> */}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/api/reviews" element={<Reviews />} />
               <Route path="/api/categories" element={<Categories />} />
-              <Route path="/api/reviews/:review_id" element={<Review />} />
+              <Route
+                path="/api/reviews/:review_id"
+                element={<ReviewDetails />}
+              />
             </Routes>
           </div>
           {/* </UserContext.Provider> */}

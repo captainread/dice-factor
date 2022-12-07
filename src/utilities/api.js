@@ -10,3 +10,10 @@ export const fetchReviews = () => {
   });
 };
 
+
+export const fetchReviewByID = (review_id) => {
+  return diceFactorAPI.get(`/reviews/${review_id}`).then(({ data }) => {
+    return data.review;
+  });
+};
+

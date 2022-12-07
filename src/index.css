@@ -55,7 +55,7 @@ body {
 
 .review-card {
   /* height: 10%; */
-  overflow:auto;
+  overflow: auto;
 }
 
 .review-card img {
@@ -64,4 +64,55 @@ body {
 
 .read-more {
   float: right;
+}
+
+.loading-wrap {
+  border-radius: 2em;
+  padding: 2rem;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.loading {
+  margin: auto;
+}
+
+#review-details-page {
+  padding: 1rem;
+  margin: auto;
+  display: block;
+  max-width: 800px;
+}
+
+#review-details-header {
+  /* background: palevioletred; */
+  overflow: auto;
+}
+
+#review-details-header h2 {
+  float: left;
+}
+
+#review-details-header h3 {
+  float: right;
+}
+
+#review-details-body {
+  text-align: left;
+  line-height: 1.5rem;
+}
+
+#review-details-body img {
+  margin: auto;
+  display: block;
+  width: 100%;
+  max-width: 800px;
+}
+
+#review-details-game {
+  overflow: auto;
+  margin: 0.5rem;
 }
