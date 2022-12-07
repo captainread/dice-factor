@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchReviewByID } from "../utilities/api";
 import Comments from "./Comments";
@@ -8,6 +8,10 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import CategoryIcon from "@mui/icons-material/Category";
 import BrushIcon from "@mui/icons-material/Brush";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -29,6 +33,19 @@ export default function ReviewDetails() {
     });
   }, [review_id]);
 
+  function handleVote(review_id, comment_id) {
+    // patchComment(comment_id).then((updatedComment) => {
+    //   setFetchedComments((currComments) => {
+    //     return currComments.map((comment) => {
+    //       if (comment.comment_id === updatedComment.comment_id) {
+    //         return { ...comment, votes: comment.votes + 1 };
+    //       }
+    //       return comment;
+    //     });
+    //   });
+    // });
+  }
+
   if (isLoading) {
     return (
       <main className="loading-wrap">
@@ -36,30 +53,39 @@ export default function ReviewDetails() {
       </main>
     );
   }
-  console.log(fetchedReview);
+
   return (
     <article id="review-details-page">
       <Item>
         <header id="review-details-header">
           <h1>{fetchedReview.title}</h1>
-          <h2>@{fetchedReview.owner}</h2>
+          <Chip id="review-details-owner"
+            avatar={<Avatar src="/broken-image.jpg" />}
+            label={fetchedReview.owner}
+          />
           <h3>{fetchedReview.created_at.slice(0, 10)}</h3>
         </header>
         <main id="review-details-body">
-          <img src={fetchedReview.review_img_url} />
+          <img src={fetchedReview.review_img_url} alt={fetchedReview.title} />
           <div id="review-details-game">
             <Stack direction="row" spacing={2}>
               <Chip
                 icon={<CategoryIcon />}
                 label={`${fetchedReview.category}`}
               />
-              <Chip
-                icon={<BrushIcon />}
-                label={`${fetchedReview.designer}`}
-              />
+              <Chip icon={<BrushIcon />} label={`${fetchedReview.designer}`} />
             </Stack>
           </div>
           <p>{fetchedReview.review_body}</p>
+          <h4 className="votes-header">Votes: {fetchedReview.votes}</h4>
+          <div className="votes-btns">
+            <IconButton aria-label="upvote" onClick={handleVote}>
+              <ThumbUpIcon />
+            </IconButton>
+            <IconButton aria-label="downvote" onClick={() => handleVote()}>
+              <ThumbDownIcon />
+            </IconButton>
+          </div>
         </main>
       </Item>
       <Comments review_id={review_id} />

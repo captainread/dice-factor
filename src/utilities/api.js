@@ -10,7 +10,6 @@ export const fetchReviews = () => {
   });
 };
 
-
 export const fetchReviewByID = (review_id) => {
   return diceFactorAPI.get(`/reviews/${review_id}`).then(({ data }) => {
     return data.review;
@@ -18,7 +17,21 @@ export const fetchReviewByID = (review_id) => {
 };
 
 export const fetchComments = (review_id) => {
-  return diceFactorAPI.get(`/reviews/${review_id}/comments`).then(({ data }) => {
-    return data.review;
-  });
-}
+  return diceFactorAPI
+    .get(`/reviews/${review_id}/comments`)
+    .then(({ data }) => {
+      return data.review;
+    });
+};
+
+// export const patchReviewVotes = (review_id) => {
+//   const patchBody = {
+//     increase: 1,
+//   };
+//   return diceFactorAPI
+//     .patch(`/comments/${comment_id}`, patchBody)
+//     .then(({ data }) => {
+//       console.log(data)
+//       return data.comment;
+//     });
+// };
