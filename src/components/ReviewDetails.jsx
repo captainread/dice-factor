@@ -1,6 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchReviewByID } from "../utilities/api";
+import {
+  fetchReviewByID,
+  patchReviewVotesUp,
+  patchReviewVotesDown,
+} from "../utilities/api";
 import Comments from "./Comments";
 import Paper from "@mui/material/Paper";
 import { experimentalStyled as styled } from "@mui/material/styles";
@@ -25,26 +29,38 @@ export default function ReviewDetails() {
   const [isLoading, setIsLoading] = useState(true);
   const [fetchedReview, setFetchedReview] = useState({});
   const { review_id } = useParams();
+  const [votes, setVotes] = useState(0);
+
+  const [disableUpvote, setDisableUpvote] = useState(false);
+  const [disableDownvote, setDisableDownvote] = useState(false);
 
   useEffect(() => {
     fetchReviewByID(review_id).then((matchedReview) => {
       setFetchedReview(matchedReview);
+      setVotes(matchedReview.votes);
       setIsLoading(false);
     });
-  }, [review_id]);
+  }, [review_id, fetchedReview.votes]);
 
-  function handleVote(review_id, comment_id) {
-    // patchComment(comment_id).then((updatedComment) => {
-    //   setFetchedComments((currComments) => {
-    //     return currComments.map((comment) => {
-    //       if (comment.comment_id === updatedComment.comment_id) {
-    //         return { ...comment, votes: comment.votes + 1 };
-    //       }
-    //       return comment;
-    //     });
-    //   });
-    // });
-  }
+  const handleUpvote = (e) => {
+    e.preventDefault();
+    setDisableUpvote(true);
+    setDisableDownvote(false);
+    setVotes((currentVotes) => {
+      return currentVotes + 1;
+    });
+    patchReviewVotesUp(review_id);
+  };
+
+  const handleDownvote = (e) => {
+    e.preventDefault();
+    setDisableDownvote(true);
+    setDisableUpvote(false);
+    setVotes((currentVotes) => {
+      return currentVotes - 1;
+    });
+    patchReviewVotesDown(review_id);
+  };
 
   if (isLoading) {
     return (
@@ -59,7 +75,8 @@ export default function ReviewDetails() {
       <Item>
         <header id="review-details-header">
           <h1>{fetchedReview.title}</h1>
-          <Chip id="review-details-owner"
+          <Chip
+            id="review-details-owner"
             avatar={<Avatar src="/broken-image.jpg" />}
             label={fetchedReview.owner}
           />
@@ -77,12 +94,20 @@ export default function ReviewDetails() {
             </Stack>
           </div>
           <p>{fetchedReview.review_body}</p>
-          <h4 className="votes-header">Votes: {fetchedReview.votes}</h4>
+          <h4 className="votes-header">Votes: {votes}</h4>
           <div className="votes-btns">
-            <IconButton aria-label="upvote" onClick={handleVote}>
+            <IconButton
+              id="upvote"
+              onClick={(e) => handleUpvote(e)}
+              disabled={disableUpvote}
+            >
               <ThumbUpIcon />
             </IconButton>
-            <IconButton aria-label="downvote" onClick={() => handleVote()}>
+            <IconButton
+              id="downvote"
+              onClick={(e) => handleDownvote(e)}
+              disabled={disableDownvote}
+            >
               <ThumbDownIcon />
             </IconButton>
           </div>

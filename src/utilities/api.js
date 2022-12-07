@@ -24,14 +24,26 @@ export const fetchComments = (review_id) => {
     });
 };
 
-// export const patchReviewVotes = (review_id) => {
-//   const patchBody = {
-//     increase: 1,
-//   };
-//   return diceFactorAPI
-//     .patch(`/comments/${comment_id}`, patchBody)
-//     .then(({ data }) => {
-//       console.log(data)
-//       return data.comment;
-//     });
-// };
+export const patchReviewVotesUp = (review_id) => {
+  const patchBody = {
+    inc_votes: +1,
+  };
+
+  return diceFactorAPI
+    .patch(`/reviews/${review_id}`, patchBody)
+    .then(({ data }) => {
+      return data.review;
+    });
+};
+
+export const patchReviewVotesDown = (review_id) => {
+  const patchBody = {
+    inc_votes: -1,
+  };
+
+  return diceFactorAPI
+    .patch(`/reviews/${review_id}`, patchBody)
+    .then(({ data }) => {
+      return data.review;
+    });
+};

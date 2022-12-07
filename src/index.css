@@ -35,6 +35,10 @@ body {
 
 #highlight {
   /* margin-top: 95px; */
+  /* background-image: url("./assets/scythe.png");
+  background-size: fill;
+  background-repeat: no-repeat;
+  background-position: center; */
   background-color: white;
   min-height: 300px;
   padding: 1rem;
