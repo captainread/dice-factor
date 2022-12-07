@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchReviewByID } from "../utilities/api";
-
+import Comments from "./Comments";
 import Paper from "@mui/material/Paper";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
@@ -51,17 +51,18 @@ export default function ReviewDetails() {
             <Stack direction="row" spacing={2}>
               <Chip
                 icon={<CategoryIcon />}
-                label={`Category: ${fetchedReview.category}`}
+                label={`${fetchedReview.category}`}
               />
               <Chip
                 icon={<BrushIcon />}
-                label={`Designer: ${fetchedReview.designer}`}
+                label={`${fetchedReview.designer}`}
               />
             </Stack>
           </div>
           <p>{fetchedReview.review_body}</p>
         </main>
       </Item>
+      <Comments review_id={review_id} />
     </article>
   );
 }

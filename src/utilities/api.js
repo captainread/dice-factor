@@ -17,3 +17,8 @@ export const fetchReviewByID = (review_id) => {
   });
 };
 
+export const fetchComments = (review_id) => {
+  return diceFactorAPI.get(`/reviews/${review_id}/comments`).then(({ data }) => {
+    return data.review;
+  });
+}

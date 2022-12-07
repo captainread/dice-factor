@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -15,7 +16,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function ReviewCard({ fetchedReviews }) {
-
   return fetchedReviews.map((review, index) => {
     return (
       <Grid item xs={2} sm={4} md={4} key={index}>
@@ -23,9 +23,7 @@ export default function ReviewCard({ fetchedReviews }) {
           <h3>{review.title}</h3>
           <p>{review.owner}</p>
           <img src={review.review_img_url} />
-          <p>
-            {review.review_body.replace(/(.{80})..+/, "$1...")}
-          </p>
+          <p>{review.review_body.replace(/(.{80})..+/, "$1...")}</p>
           <Link to={`/api/reviews/${review.review_id}`}>
             <Button
               className="read-more"

@@ -38,7 +38,7 @@ function Nav() {
   };
 
   return (
-    <AppBar color="secondary" position="static" sx={{ padding: 0.5 }}>
+    <AppBar color="secondary" position="fixed" sx={{ padding: 0.5 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ height: 80 }}>
           {/* menu icon on phone */}
