@@ -5,13 +5,19 @@ const diceFactorAPI = axios.create({
 });
 
 export const fetchReviews = () => {
-  return diceFactorAPI.get("/reviews").then(({ data }) => {
+  return diceFactorAPI.get(`/reviews`).then(({ data }) => {
     return data.review;
   });
 };
 
 export const fetchReviewByID = (review_id) => {
   return diceFactorAPI.get(`/reviews/${review_id}`).then(({ data }) => {
+    return data.review;
+  });
+};
+
+export const fetchReviewsByCategory = (category) => {
+  return diceFactorAPI.get(`/reviews?category=${category}`).then(({ data }) => {
     return data.review;
   });
 };
@@ -46,4 +52,23 @@ export const patchReviewVotesDown = (review_id) => {
     .then(({ data }) => {
       return data.review;
     });
+};
+
+export const postComment = (review_id, body, username) => {
+  const postBody = {
+    username: `${username}`,
+    body: `${body}`,
+  };
+
+  return diceFactorAPI
+    .post(`/reviews/${review_id}/comments`, postBody)
+    .then(({ data }) => {
+      return data;
+    });
+};
+
+export const fetchCategories = () => {
+  return diceFactorAPI.get(`/categories`).then(({ data }) => {
+    return data.category;
+  });
 };

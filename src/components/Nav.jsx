@@ -10,9 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-
 import trLogo from "../assets/DF-logo-trans.png";
 
 const pages = ["Reviews", "Categories", "About"];
@@ -38,7 +36,7 @@ function Nav() {
   };
 
   return (
-    <AppBar color="secondary" position="fixed" sx={{ padding: 0.5 }}>
+    <AppBar color="primary" position="fixed" sx={{ padding: 0.5 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ height: 80 }}>
           {/* menu icon on phone */}
@@ -103,11 +101,9 @@ function Nav() {
 
           {/* user icon/link */}
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar src="/broken-image.jpg" />
+            </IconButton>
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"

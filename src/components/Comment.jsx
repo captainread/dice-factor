@@ -1,4 +1,8 @@
 import * as React from "react";
+import { useContext } from "react";
+
+import { UserContext } from "../utilities/contexts";
+
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
@@ -8,6 +12,8 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import Button from "@mui/material/Button";
+import EditIcon from "@mui/icons-material/Edit";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -18,6 +24,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Comment({ fetchedComments, handleVote }) {
+  const { user } = useContext(UserContext);
+
   return (
     <main>
       {fetchedComments.length === 0
@@ -31,6 +39,16 @@ export default function Comment({ fetchedComments, handleVote }) {
                       avatar={<Avatar src="/broken-image.jpg" />}
                       label={comment.author}
                     />
+                    {user.username === comment.author ? (
+                      <Button
+                        size="small"
+                        className="comments-add-btn"
+                        variant="outlined"
+                        endIcon={<EditIcon />}
+                      >
+                        Edit
+                      </Button>
+                    ) : null}
                     <p>{comment.body}</p>
                     <h4 className="votes-header">Votes: {comment.votes}</h4>
                     <div className="votes-btns">
