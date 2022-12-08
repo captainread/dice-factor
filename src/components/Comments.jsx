@@ -8,6 +8,7 @@ import { UserContext } from "../utilities/contexts";
 import {
   TextField,
   Dialog,
+  TextareaAutosize,
   DialogActions,
   DialogContent,
   DialogTitle,
@@ -86,11 +87,12 @@ export default function Comments({ review_id }) {
               autoComplete="off"
             >
               <div>
-                <TextField
+                <TextareaAutosize
                   required
                   id="outlined-required"
                   label="Required"
                   placeholder="Please enter text"
+                  style={{ width: 200, minHeight: 50 }}
                   onChange={(event) => {
                     setNewComment((currComment) => {
                       const newComment = { ...currComment };

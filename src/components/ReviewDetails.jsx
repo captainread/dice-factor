@@ -30,7 +30,8 @@ export default function ReviewDetails() {
   const [votes, setVotes] = useState(0);
   const [error, setError] = useState(false);
   const [disableUpvote, setDisableUpvote] = useState(false);
-  const [disableDownvote, setDisableDownvote] = useState(false);
+  // const [disableDownvote, setDisableDownvote] = useState(false);
+  const [voteClicked, setVoteClicked] = useState("");
 
   useEffect(() => {
     fetchReviewByID(review_id).then((matchedReview) => {
@@ -44,17 +45,24 @@ export default function ReviewDetails() {
 
   const handleUpvote = (e) => {
     e.preventDefault();
-    setDisableUpvote(true);
-    setDisableDownvote(false);
+    setVoteClicked("upvote");
     setVotes((currentVotes) => {
-      return currentVotes + 1;
+      if (voteClicked === "") {
+        setVoteClicked("upvote");
+        // setDisableUpvote(true);
+        return currentVotes + 1;
+      } else if (voteClicked === "upvote") {
+        setVoteClicked("");
+        // setDisableUpvote(false);
+        return currentVotes - 1;
+      }
     });
     patchReviewVotesUp(review_id)
       .then(() => {
         setError(false);
       })
       .catch((error) => {
-        setDisableUpvote(false);
+        setVoteClicked("");
         setError(true);
         setVotes((currentVotes) => {
           return currentVotes - 1;
@@ -64,17 +72,26 @@ export default function ReviewDetails() {
 
   const handleDownvote = (e) => {
     e.preventDefault();
-    setDisableDownvote(true);
-    setDisableUpvote(false);
+    setVoteClicked("downvote");
     setVotes((currentVotes) => {
-      return currentVotes - 1;
+      if (voteClicked === "") {
+        setVoteClicked("downvote");
+        // setDisableDownvote(true);
+        return currentVotes - 1;
+      }
+      if (voteClicked === "downvote") {
+        setVoteClicked("");
+        // setDisableDownvote(false);
+        return currentVotes + 1;
+      }
     });
     patchReviewVotesDown(review_id)
       .then(() => {
         setError(false);
       })
       .catch((error) => {
-        setDisableDownvote(false);
+        // setDisableDownvote(false);
+        setVoteClicked("");
         setError(true);
         setVotes((currentVotes) => {
           return currentVotes + 1;
@@ -119,14 +136,14 @@ export default function ReviewDetails() {
             <IconButton
               id="upvote"
               onClick={(e) => handleUpvote(e)}
-              disabled={disableUpvote}
+              // disabled={disableUpvote}
             >
               <ThumbUpIcon />
             </IconButton>
             <IconButton
               id="downvote"
               onClick={(e) => handleDownvote(e)}
-              disabled={disableDownvote}
+              // disabled={disableDownvote}
             >
               <ThumbDownIcon />
             </IconButton>
