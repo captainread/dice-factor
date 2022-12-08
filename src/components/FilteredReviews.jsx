@@ -7,10 +7,10 @@ import ReviewCard from "./ReviewCard";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
-export default function FilteredReviews({ match, location }) {
+export default function FilteredReviews() {
   const [fetchedReviews, setFetchedReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [queryParams, setQueryParams] = useSearchParams();
+  const [queryParams] = useSearchParams();
   const currCategory = queryParams.get("category");
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function FilteredReviews({ match, location }) {
   return (
     <Box id="all-page" sx={{ width: "100%" }}>
       <header>
-        <h2>{formatCat(currCategory)}</h2>
+        <h2>"{formatCat(currCategory)}" Game Reviews</h2>
       </header>
       <Grid
         container
