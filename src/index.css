@@ -39,19 +39,28 @@ a {
 }
 
 #highlight {
-  /* margin-top: 95px; */
-  /* background-image: url("./assets/scythe.png");
-  background-size: fill;
-  background-repeat: no-repeat;
-  background-position: center; */
   background-color: white;
+  border-radius: 20px;
   min-height: 300px;
+  /* max-height: 400px; */
+  max-height: 50vh;
   padding: 1rem;
+  background-size: cover;
+  background-position: center;
+  background-image: url("./assets/scythe-art.jpg");
+  overflow: auto;
 }
 
 #highlight h1 {
+  background-color: #45cbb2;
+  border-radius: 20px;
+  font-size: 8vw;
+  font-weight: bold;
+  /* margin: 0 auto; */
+  padding: 10px;
+  mix-blend-mode: hard-light;
+  text-transform: uppercase;
   text-align: left;
-  font-size: 230%;
 }
 
 #hightlight-btn-div {

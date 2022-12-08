@@ -23,7 +23,7 @@ import ReviewCard from "./ReviewCard";
 export default function Reviews() {
   const [fetchedReviews, setFetchedReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sortType, setSortType] = useState("votes");
+  const [sortType, setSortType] = useState("created_at");
   const [sortOrder, setSortOrder] = useState("desc");
 
   let searchParams = { sort_by: sortType, order: sortOrder };
