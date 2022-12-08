@@ -52,13 +52,10 @@ export default function Comment({ fetchedComments, handleVote }) {
                     <p>{comment.body}</p>
                     <h4 className="votes-header">Votes: {comment.votes}</h4>
                     <div className="votes-btns">
-                      <IconButton aria-label="upvote" onClick={handleVote}>
+                      <IconButton aria-label="upvote">
                         <ThumbUpIcon />
                       </IconButton>
-                      <IconButton
-                        aria-label="downvote"
-                        onClick={() => handleVote()}
-                      >
+                      <IconButton aria-label="downvote">
                         <ThumbDownIcon />
                       </IconButton>
                     </div>

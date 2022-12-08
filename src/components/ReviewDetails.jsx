@@ -29,8 +29,6 @@ export default function ReviewDetails() {
   const [fetchedReview, setFetchedReview] = useState({});
   const [votes, setVotes] = useState(0);
   const [error, setError] = useState(false);
-  const [disableUpvote, setDisableUpvote] = useState(false);
-  // const [disableDownvote, setDisableDownvote] = useState(false);
   const [voteClicked, setVoteClicked] = useState("");
 
   useEffect(() => {
@@ -49,8 +47,11 @@ export default function ReviewDetails() {
     setVotes((currentVotes) => {
       if (voteClicked === "") {
         setVoteClicked("upvote");
-        // setDisableUpvote(true);
         return currentVotes + 1;
+      }
+      if (voteClicked === "downvote") {
+        setVoteClicked("upvote");
+        return currentVotes + 2;
       } else if (voteClicked === "upvote") {
         setVoteClicked("");
         // setDisableUpvote(false);
@@ -76,12 +77,14 @@ export default function ReviewDetails() {
     setVotes((currentVotes) => {
       if (voteClicked === "") {
         setVoteClicked("downvote");
-        // setDisableDownvote(true);
         return currentVotes - 1;
+      }
+      if (voteClicked === "upvote") {
+        setVoteClicked("downvote");
+        return currentVotes - 2;
       }
       if (voteClicked === "downvote") {
         setVoteClicked("");
-        // setDisableDownvote(false);
         return currentVotes + 1;
       }
     });
@@ -90,7 +93,6 @@ export default function ReviewDetails() {
         setError(false);
       })
       .catch((error) => {
-        // setDisableDownvote(false);
         setVoteClicked("");
         setError(true);
         setVotes((currentVotes) => {
@@ -136,14 +138,14 @@ export default function ReviewDetails() {
             <IconButton
               id="upvote"
               onClick={(e) => handleUpvote(e)}
-              // disabled={disableUpvote}
+              color={voteClicked === "upvote" ? "success" : ""}
             >
               <ThumbUpIcon />
             </IconButton>
             <IconButton
               id="downvote"
               onClick={(e) => handleDownvote(e)}
-              // disabled={disableDownvote}
+              color={voteClicked === "downvote" ? "error" : ""}
             >
               <ThumbDownIcon />
             </IconButton>
