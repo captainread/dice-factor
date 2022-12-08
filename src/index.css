@@ -20,10 +20,6 @@ a {
   color: #3e2f34;
 }
 
-a:hover {
-  opacity: 50%;
-}
-
 #logo {
   /* max-width: 100px;
   height: auto; */

@@ -12,7 +12,7 @@ import Home from "./components/Home";
 import Reviews from "./components/Reviews";
 import ReviewDetails from "./components/ReviewDetails";
 import Categories from "./components/Categories";
-import Breadcrumb from "./components/Breadcrumb";
+import FilteredReviews from "./components/FilteredReviews";
 
 function App() {
   const [user, setUser] = useState({
@@ -30,7 +30,6 @@ function App() {
           <UserContext.Provider value={{ user, setUser }}>
             <div className="App">
               <Nav />
-              {/* <Breadcrumb /> */}
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/api/reviews" element={<Reviews />} />
@@ -39,6 +38,11 @@ function App() {
                   path="/api/reviews/:review_id"
                   element={<ReviewDetails />}
                 />
+                <Route
+                  path=":pathcategory"
+                  element={<FilteredReviews />}
+                />
+                <Route path="*" element={<p>Error: path not resolved</p>} />
               </Routes>
             </div>
           </UserContext.Provider>

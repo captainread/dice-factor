@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { fetchCategories } from "../utilities/api";
 import Reviews from "./Reviews";
+import { formatCat } from "../utilities/util";
 
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -31,9 +32,7 @@ export default function Categories() {
   }, []);
 
   const handleClick = (e) => {
-    const cat = e.target.innerText;
-    console.log(cat);
-    return <p>hgdfhd</p>
+    const cat = e.target.value;
   };
 
   if (isLoading) {
@@ -60,9 +59,13 @@ export default function Categories() {
         >
           {fetchedCats.map((category, index) => {
             return (
-              <Link to={`/reviews?category=${category.slug}`}>
-                <Button key={index} onClick={handleClick} variant="contained">
-                  {category.slug}
+              <Link key={index} to={`/reviews?category=${category.slug}`}>
+                <Button
+                  value={category.slug}
+                  onClick={handleClick}
+                  variant="contained"
+                >
+                  {formatCat(category.slug)}
                 </Button>
               </Link>
             );

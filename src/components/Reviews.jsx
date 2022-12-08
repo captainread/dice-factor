@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { formatCat } from "../utilities/util";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -8,9 +9,12 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-import { fetchReviews, fetchCategories, fetchReviewsByCategory } from "../utilities/api";
+import {
+  fetchReviews,
+  fetchCategories,
+  fetchReviewsByCategory,
+} from "../utilities/api";
 import ReviewCard from "./ReviewCard";
-import Breadcrumb from "./Breadcrumb";
 
 export default function Reviews() {
   const [fetchedReviews, setFetchedReviews] = useState([]);
@@ -18,6 +22,7 @@ export default function Reviews() {
   const [fetchedCats, setFetchedCats] = useState([]);
   const [currCategory, setCurrCategory] = useState("");
 
+  // fetches all reviews
   useEffect(() => {
     fetchReviews().then((reviews) => {
       setFetchedReviews(reviews);
@@ -25,12 +30,22 @@ export default function Reviews() {
     });
   }, []);
 
+  // fetches all categories to populate drop-down
   useEffect(() => {
     fetchCategories().then((cats) => {
       setFetchedCats(cats);
       setIsLoading(false);
     });
   }, []);
+
+  useEffect(() => {
+    if (currCategory) {
+      fetchReviewsByCategory(currCategory).then((reviews) => {
+        setFetchedReviews(reviews);
+        setIsLoading(false);
+      });
+    }
+  }, [currCategory]);
 
   if (isLoading) {
     return (
@@ -40,13 +55,9 @@ export default function Reviews() {
     );
   }
 
+  // handles change in drop-down selection. Should update currCategory
   const handleChange = (event) => {
     setCurrCategory(event.target.value);
-    console.log(currCategory)
-    fetchReviewsByCategory(currCategory).then((reviews) => {
-      setFetchedReviews(reviews);
-      setIsLoading(false);
-    });
   };
 
   return (
@@ -70,7 +81,7 @@ export default function Reviews() {
             {fetchedCats.map((category, index) => {
               return (
                 <MenuItem value={category.slug} key={index}>
-                  {category.slug}
+                  {formatCat(category.slug)}
                 </MenuItem>
               );
             })}
