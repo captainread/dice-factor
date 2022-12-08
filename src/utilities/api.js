@@ -4,10 +4,12 @@ const diceFactorAPI = axios.create({
   baseURL: "https://dicefactor.cyclic.app/api",
 });
 
-export const fetchReviews = () => {
-  return diceFactorAPI.get(`/reviews`).then(({ data }) => {
-    return data.review;
-  });
+export const fetchReviews = (searchParams) => {
+  return diceFactorAPI
+    .get(`/reviews`, { params: searchParams })
+    .then(({ data }) => {
+      return data.review;
+    });
 };
 
 export const fetchReviewByID = (review_id) => {

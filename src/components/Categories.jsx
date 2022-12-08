@@ -31,10 +31,6 @@ export default function Categories() {
     });
   }, []);
 
-  const handleClick = (e) => {
-    const cat = e.target.value;
-  };
-
   if (isLoading) {
     return (
       <main className="loading-wrap">
@@ -62,7 +58,6 @@ export default function Categories() {
               <Link key={index} to={`/reviews?category=${category.slug}`}>
                 <Button
                   value={category.slug}
-                  onClick={handleClick}
                   variant="contained"
                 >
                   {formatCat(category.slug)}
