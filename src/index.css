@@ -11,7 +11,17 @@ body {
 }
 
 .App {
+  margin-top: 95px;
   text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: #3e2f34;
+}
+
+a:hover {
+  opacity: 50%;
 }
 
 #logo {
@@ -33,7 +43,11 @@ body {
 }
 
 #highlight {
-  margin-top: 95px;
+  /* margin-top: 95px; */
+  /* background-image: url("./assets/scythe.png");
+  background-size: fill;
+  background-repeat: no-repeat;
+  background-position: center; */
   background-color: white;
   min-height: 300px;
   padding: 1rem;
@@ -48,10 +62,10 @@ body {
   float: right;
 }
 
-#categories-page {
+#all-page {
   background-color: #f6efd9;
   padding: 1rem;
-  height: 80vh;
+  min-height: 88vh;
 }
 
 .review-card {
@@ -91,9 +105,10 @@ body {
 #review-details-header {
   /* background: palevioletred; */
   overflow: auto;
+  /* position: fixed; */
 }
 
-#review-details-header h2 {
+#review-details-owner {
   float: left;
 }
 
@@ -104,6 +119,7 @@ body {
 #review-details-body {
   text-align: left;
   line-height: 1.5rem;
+  overflow: auto;
 }
 
 #review-details-body img {
@@ -116,4 +132,52 @@ body {
 #review-details-game {
   overflow: auto;
   margin: 0.5rem;
+}
+
+.votes-header {
+  margin: 0;
+  float: left;
+}
+
+.votes-btns {
+  float: right;
+}
+
+#comments-section {
+  /* border: 1px solid black; */
+  /* background-color: aqua; */
+  margin-top: 2rem;
+}
+
+#comments-header {
+  /* background-color: pink; */
+  height: 50px;
+}
+
+#comments-section h1 {
+  margin: 0;
+  float: left;
+}
+
+.comments-add-btn {
+  float: right;
+}
+
+#comments-block {
+  /* overflow: auto; */
+  /* background-color: blueviolet; */
+  /* background-color: yellow; */
+}
+
+.comments-card {
+  margin: 0.5rem;
+}
+
+.comments-card h4 {
+  margin: 0;
+  float: left;
+}
+
+#categories-header {
+  padding-bottom: 1rem;
 }
