@@ -5,28 +5,32 @@ import Comment from "./Comment";
 import { fetchComments, postComment } from "../utilities/api";
 import { UserContext } from "../utilities/contexts";
 
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
+import {
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+  Box,
+  Alert,
+} from "@mui/material";
 import AddCommentIcon from "@mui/icons-material/AddComment";
-import Box from "@mui/material/Box";
 
 export default function Comments({ review_id }) {
   const { user } = useContext(UserContext);
+  const [error, setError] = useState(false);
+  const [commentSuccess, setCommentSuccess] = useState(false);
   const [fetchedComments, setFetchedComments] = useState([]);
   const [newComment, setNewComment] = useState({
     body: "",
   });
-  const [commentSubmission, setCommentSubmission] = useState(false);
 
   useEffect(() => {
     fetchComments(review_id).then((matchedComments) => {
       setFetchedComments(matchedComments);
     });
-  }, [review_id]);
+  }, [review_id, newComment]);
 
   const [open, setOpen] = React.useState(false);
 
@@ -41,8 +45,21 @@ export default function Comments({ review_id }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setOpen(false);
-    setCommentSubmission(true);
-    postComment(review_id, newComment.body, user.username);
+    postComment(review_id, newComment.body, user.username)
+      .then((commentFromAPI) => {
+        setNewComment("");
+        setCommentSuccess(true);
+        setError(false);
+        setFetchedComments((currComments) => {
+          const newComments = [...currComments];
+          newComments.push(commentFromAPI);
+          return newComments;
+        });
+      })
+      .catch((error) => {
+        setError(true);
+        setCommentSuccess(false);
+      });
   };
 
   return (
@@ -92,6 +109,14 @@ export default function Comments({ review_id }) {
         </Dialog>
       </header>
       <main id="comments-block">
+        {error ? (
+          <Alert severity="error">
+            Your comment failed to post. Please try again.{" "}
+          </Alert>
+        ) : null}
+        {commentSuccess ? (
+          <Alert severity="success"> Your comment has been posted.</Alert>
+        ) : null}
         <Comment fetchedComments={fetchedComments} />
       </main>
     </section>

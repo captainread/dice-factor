@@ -1,19 +1,17 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+
 import {
   fetchReviewByID,
   patchReviewVotesUp,
   patchReviewVotesDown,
 } from "../utilities/api";
 import Comments from "./Comments";
-import Paper from "@mui/material/Paper";
+
+import { Paper, Chip, Stack, Avatar, IconButton, Alert } from "@mui/material";
 import { experimentalStyled as styled } from "@mui/material/styles";
-import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
 import CategoryIcon from "@mui/icons-material/Category";
 import BrushIcon from "@mui/icons-material/Brush";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 
@@ -26,11 +24,11 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function ReviewDetails() {
+  const { review_id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [fetchedReview, setFetchedReview] = useState({});
-  const { review_id } = useParams();
   const [votes, setVotes] = useState(0);
-
+  const [error, setError] = useState(false);
   const [disableUpvote, setDisableUpvote] = useState(false);
   const [disableDownvote, setDisableDownvote] = useState(false);
 
@@ -42,6 +40,8 @@ export default function ReviewDetails() {
     });
   }, [review_id, fetchedReview.votes]);
 
+  useEffect(() => {}, [error]);
+
   const handleUpvote = (e) => {
     e.preventDefault();
     setDisableUpvote(true);
@@ -49,7 +49,17 @@ export default function ReviewDetails() {
     setVotes((currentVotes) => {
       return currentVotes + 1;
     });
-    patchReviewVotesUp(review_id);
+    patchReviewVotesUp(review_id)
+      .then(() => {
+        setError(false);
+      })
+      .catch((error) => {
+        setDisableUpvote(false);
+        setError(true);
+        setVotes((currentVotes) => {
+          return currentVotes - 1;
+        });
+      });
   };
 
   const handleDownvote = (e) => {
@@ -59,7 +69,17 @@ export default function ReviewDetails() {
     setVotes((currentVotes) => {
       return currentVotes - 1;
     });
-    patchReviewVotesDown(review_id);
+    patchReviewVotesDown(review_id)
+      .then(() => {
+        setError(false);
+      })
+      .catch((error) => {
+        setDisableDownvote(false);
+        setError(true);
+        setVotes((currentVotes) => {
+          return currentVotes + 1;
+        });
+      });
   };
 
   if (isLoading) {
@@ -112,6 +132,9 @@ export default function ReviewDetails() {
             </IconButton>
           </div>
         </main>
+        {error ? (
+          <Alert severity="error">Vote failed, please try again. </Alert>
+        ) : null}
       </Item>
       <Comments review_id={review_id} />
     </article>
