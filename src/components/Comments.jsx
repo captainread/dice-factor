@@ -9,7 +9,6 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
-  TextareaAutosize,
 } from "@mui/material";
 import { fetchComments, postComment } from "../utilities/api";
 import { useContext, useEffect, useState } from "react";

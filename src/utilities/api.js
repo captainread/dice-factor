@@ -84,3 +84,9 @@ export const deleteComment = (comment_id) => {
     return data;
   });
 };
+
+export const fetchUsers = () => {
+  return diceFactorAPI.get("/users").then(({ data }) => {
+    return data.users;
+  });
+};
