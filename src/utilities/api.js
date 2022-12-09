@@ -18,19 +18,17 @@ export const fetchReviewByID = (review_id) => {
   });
 };
 
+export const fetchCategories = () => {
+  return diceFactorAPI.get(`/categories`).then(({ data }) => {
+    return data.category;
+  });
+};
+
 export const fetchReviewsByCategory = (category, sortType, sortOrder) => {
   return diceFactorAPI
     .get(`/reviews?category=${category}`, {
       params: { sort_by: sortType, order: sortOrder },
     })
-    .then(({ data }) => {
-      return data.review;
-    });
-};
-
-export const fetchComments = (review_id) => {
-  return diceFactorAPI
-    .get(`/reviews/${review_id}/comments`)
     .then(({ data }) => {
       return data.review;
     });
@@ -60,6 +58,14 @@ export const patchReviewVotesDown = (review_id) => {
     });
 };
 
+export const fetchComments = (review_id) => {
+  return diceFactorAPI
+    .get(`/reviews/${review_id}/comments`)
+    .then(({ data }) => {
+      return data.review;
+    });
+};
+
 export const postComment = (review_id, body, username) => {
   const postBody = {
     username: `${username}`,
@@ -73,8 +79,9 @@ export const postComment = (review_id, body, username) => {
     });
 };
 
-export const fetchCategories = () => {
-  return diceFactorAPI.get(`/categories`).then(({ data }) => {
-    return data.category;
+export const deleteComment = (comment_id) => {
+  return diceFactorAPI.delete(`/comments/${comment_id}`).then(({ data }) => {
+    console.log(data);
+    return data;
   });
-};
+}

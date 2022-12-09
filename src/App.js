@@ -13,6 +13,7 @@ import Reviews from "./components/Reviews";
 import ReviewDetails from "./components/ReviewDetails";
 import Categories from "./components/Categories";
 import FilteredReviews from "./components/FilteredReviews";
+import About from "./components/About";
 
 function App() {
   const [user, setUser] = useState({
@@ -32,16 +33,14 @@ function App() {
               <Nav />
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/api/About" element={<About />} />
                 <Route path="/api/reviews" element={<Reviews />} />
                 <Route path="/api/categories" element={<Categories />} />
                 <Route
                   path="/api/reviews/:review_id"
                   element={<ReviewDetails />}
                 />
-                <Route
-                  path=":pathcategory"
-                  element={<FilteredReviews />}
-                />
+                <Route path=":pathcategory" element={<FilteredReviews />} />
                 <Route path="*" element={<p>Error: path not resolved</p>} />
               </Routes>
             </div>

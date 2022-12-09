@@ -1,19 +1,26 @@
 import * as React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { UserContext } from "../utilities/contexts";
+import { deleteComment } from "../utilities/api";
 
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
+import {
+  Paper,
+  Stack,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  Button,
+  Box,
+  Alert,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Chip } from "@material-ui/core";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import Button from "@mui/material/Button";
-import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -23,34 +30,90 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function Comment({ fetchedComments, handleVote }) {
+export default function Comment({ fetchedComments, setFetchedComments }) {
   const { user } = useContext(UserContext);
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
+  const [commentToDelete, setCommentToDelete] = useState(null);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
+
+  const handleClickOpen = (comment_id) => {
+    setOpen(true);
+    setCommentToDelete(comment_id);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setCommentToDelete(null);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setOpen(false);
+    deleteComment(commentToDelete)
+      .then(() => {
+        setError(false);
+        setDeleteSuccess(true);
+        setFetchedComments((currComments) => {
+          const newComments = [...currComments];
+          newComments.shift();
+          return newComments;
+        });
+      })
+      .catch(() => {
+        setError(true);
+        setDeleteSuccess(false);
+      });
+  };
 
   return (
     <main>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Delete Comment?</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleSubmit}>Yes</Button>
+          <Button onClick={handleClose}>No</Button>
+        </DialogActions>
+      </Dialog>
+
+      {error ? (
+        <Alert id="hideMeAfter5Seconds" severity="error">
+          Failed to delete comment. Please try again.{" "}
+        </Alert>
+      ) : null}
+      {deleteSuccess ? (
+        <Alert id="hideMeAfter5Seconds" severity="warning">
+          {" "}
+          Comment deleted.
+        </Alert>
+      ) : null}
+
       {fetchedComments.length === 0
         ? "Be the first to leave a comment."
-        : fetchedComments.map((comment, index) => {
+        : fetchedComments.map(({ body, author, comment_id, votes }, index) => {
             return (
               <Box key={index} sx={{ width: "100%" }}>
                 <Stack spacing={2}>
                   <Item className="comments-card">
                     <Chip
                       avatar={<Avatar src="/broken-image.jpg" />}
-                      label={comment.author}
+                      label={author}
                     />
-                    {user.username === comment.author ? (
+
+                    {user.username === author ? (
                       <Button
+                        onClick={() => handleClickOpen(comment_id)}
                         size="small"
                         className="comments-add-btn"
                         variant="outlined"
-                        endIcon={<EditIcon />}
+                        endIcon={<DeleteIcon />}
                       >
-                        Edit
+                        Delete
                       </Button>
                     ) : null}
-                    <p>{comment.body}</p>
-                    <h4 className="votes-header">Votes: {comment.votes}</h4>
+
+                    <p>{body}</p>
+                    <h4 className="votes-header">Votes: {votes}</h4>
                     <div className="votes-btns">
                       <IconButton aria-label="upvote">
                         <ThumbUpIcon />

@@ -6,7 +6,6 @@ import { fetchComments, postComment } from "../utilities/api";
 import { UserContext } from "../utilities/contexts";
 
 import {
-  TextField,
   Dialog,
   TextareaAutosize,
   DialogActions,
@@ -57,7 +56,7 @@ export default function Comments({ review_id }) {
           return newComments;
         });
       })
-      .catch((error) => {
+      .catch(() => {
         setError(true);
         setCommentSuccess(false);
       });
@@ -112,14 +111,20 @@ export default function Comments({ review_id }) {
       </header>
       <main id="comments-block">
         {error ? (
-          <Alert severity="error">
+          <Alert id="hideMeAfter5Seconds" severity="error">
             Your comment failed to post. Please try again.{" "}
           </Alert>
         ) : null}
         {commentSuccess ? (
-          <Alert severity="success"> Your comment has been posted.</Alert>
+          <Alert id="hideMeAfter5Seconds" severity="success">
+            {" "}
+            Your comment has been posted.
+          </Alert>
         ) : null}
-        <Comment fetchedComments={fetchedComments} />
+        <Comment
+          fetchedComments={fetchedComments}
+          setFetchedComments={setFetchedComments}
+        />
       </main>
     </section>
   );
