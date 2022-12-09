@@ -13,7 +13,6 @@ export default function Highlight() {
         <br />
         you're gonna need a bigger table.
       </h1>
-      <Stack direction="row" spacing={2}></Stack>
       <div id="hightlight-btn-div">
         <Link to={`/api/reviews/8`}>
           <Button

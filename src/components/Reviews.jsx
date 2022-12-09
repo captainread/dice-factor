@@ -8,19 +8,29 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import FilterListIcon from "@mui/icons-material/FilterList";
 
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+
 import { fetchReviews } from "../utilities/api";
 import ReviewCard from "./ReviewCard";
 
 export default function Reviews() {
   const [fetchedReviews, setFetchedReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [sortType, setSortType] = useState("created_at");
+  const [sortOrder, setSortOrder] = useState("desc");
 
   useEffect(() => {
-    fetchReviews().then((reviews) => {
+    fetchReviews(sortType, sortOrder).then((reviews) => {
       setFetchedReviews(reviews);
       setIsLoading(false);
     });
-  }, []);
+  }, [sortType, sortOrder]);
 
   if (isLoading) {
     return (
@@ -30,10 +40,18 @@ export default function Reviews() {
     );
   }
 
+  const handleChange = (event) => {
+    setSortType(event.target.value);
+  };
+
+  const handleRadioChange = (event) => {
+    setSortOrder(event.target.value);
+  };
+
   return (
     <Box id="all-page" sx={{ width: "100%" }}>
       <header id="all-reviews">
-        <h2 >All Reviews</h2>
+        <h2>All Reviews</h2>
         <Tooltip id="filter-tip" title="Click here to filter by category.">
           <Link to="/api/categories">
             <IconButton>
@@ -41,6 +59,38 @@ export default function Reviews() {
             </IconButton>
           </Link>
         </Tooltip>
+
+        <Box sx={{ minWidth: 120 }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={sortType}
+              label="Sort By"
+              onChange={handleChange}
+            >
+              <MenuItem value={"created_at"}>Date</MenuItem>
+              <MenuItem value={"votes"}>Votes</MenuItem>
+              <MenuItem value={"comment_count"}>Comments</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+
+        <FormControl>
+          <RadioGroup row defaultValue="desc">
+            <FormControlLabel
+              value="desc"
+              control={<Radio onChange={handleRadioChange} />}
+              label="Descending"
+            />
+            <FormControlLabel
+              value="asc"
+              control={<Radio onChange={handleRadioChange} />}
+              label="Ascending"
+            />
+          </RadioGroup>
+        </FormControl>
       </header>
 
       <Grid
