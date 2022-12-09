@@ -1,37 +1,40 @@
-import { fetchReviewsByCategory } from "../utilities/api";
-import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
-import { formatCat } from "../utilities/util";
+import {
+  Box,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Select,
+  Tooltip,
+} from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import FilterListIcon from "@mui/icons-material/FilterList";
 import ReviewCard from "./ReviewCard";
+import { fetchReviews } from "../../utilities/api";
 
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-
-export default function FilteredReviews() {
+export default function Reviews() {
   const [fetchedReviews, setFetchedReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [queryParams] = useSearchParams();
-  const currCategory = queryParams.get("category");
   const [sortType, setSortType] = useState("created_at");
   const [sortOrder, setSortOrder] = useState("desc");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (currCategory) {
-      fetchReviewsByCategory(currCategory, sortType, sortOrder).then(
-        (reviews) => {
-          setFetchedReviews(reviews);
-          setIsLoading(false);
-        }
-      );
-    }
-  }, [currCategory, sortType, sortOrder]);
+    fetchReviews(sortType, sortOrder)
+      .then((reviews) => {
+        setFetchedReviews(reviews);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        navigate("/error");
+      });
+  }, [sortType, sortOrder, navigate]);
 
   if (isLoading) {
     return (
@@ -51,8 +54,16 @@ export default function FilteredReviews() {
 
   return (
     <Box id="all-page" sx={{ width: "100%" }}>
-      <header>
-        <h2>{formatCat(currCategory)} Game Reviews</h2>
+      <header id="all-reviews">
+        <h2>All Reviews</h2>
+        <Tooltip id="filter-tip" title="Click here to filter by category.">
+          <Link to="/api/categories">
+            <IconButton>
+              <FilterListIcon />
+            </IconButton>
+          </Link>
+        </Tooltip>
+
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
@@ -85,6 +96,7 @@ export default function FilteredReviews() {
           </RadioGroup>
         </FormControl>
       </header>
+
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}

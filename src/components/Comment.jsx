@@ -1,26 +1,26 @@
 import * as React from "react";
-import { useContext, useState } from "react";
-
-import { UserContext } from "../utilities/contexts";
-import { deleteComment } from "../utilities/api";
 
 import {
-  Paper,
-  Stack,
+  Alert,
+  Box,
+  Button,
   Dialog,
   DialogActions,
   DialogTitle,
-  Button,
-  Box,
-  Alert,
+  Paper,
+  Stack,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { Chip } from "@material-ui/core";
+import { useContext, useState } from "react";
+
 import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import { Chip } from "@material-ui/core";
 import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import { UserContext } from "../utilities/contexts";
+import { deleteComment } from "../utilities/api";
+import { styled } from "@mui/material/styles";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -81,6 +81,7 @@ export default function Comment({ fetchedComments, setFetchedComments }) {
           Failed to delete comment. Please try again.{" "}
         </Alert>
       ) : null}
+      
       {deleteSuccess ? (
         <Alert id="hideMeAfter5Seconds" severity="warning">
           {" "}

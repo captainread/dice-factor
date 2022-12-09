@@ -1,19 +1,18 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-
+import { Alert, Avatar, Chip, IconButton, Paper, Stack } from "@mui/material";
 import {
   fetchReviewByID,
-  patchReviewVotesUp,
   patchReviewVotesDown,
-} from "../utilities/api";
-import Comments from "./Comments";
+  patchReviewVotesUp,
+} from "../../utilities/api";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { Paper, Chip, Stack, Avatar, IconButton, Alert } from "@mui/material";
-import { experimentalStyled as styled } from "@mui/material/styles";
-import CategoryIcon from "@mui/icons-material/Category";
 import BrushIcon from "@mui/icons-material/Brush";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import CategoryIcon from "@mui/icons-material/Category";
+import Comments from "../Comments";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import { experimentalStyled as styled } from "@mui/material/styles";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -30,14 +29,19 @@ export default function ReviewDetails() {
   const [votes, setVotes] = useState(0);
   const [error, setError] = useState(false);
   const [voteClicked, setVoteClicked] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchReviewByID(review_id).then((matchedReview) => {
-      setFetchedReview(matchedReview);
-      setVotes(matchedReview.votes);
-      setIsLoading(false);
-    });
-  }, [review_id, fetchedReview.votes]);
+    fetchReviewByID(review_id)
+      .then((matchedReview) => {
+        setFetchedReview(matchedReview);
+        setVotes(matchedReview.votes);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        navigate("/error");
+      });
+  }, [review_id, fetchedReview.votes, navigate]);
 
   useEffect(() => {}, [error]);
 

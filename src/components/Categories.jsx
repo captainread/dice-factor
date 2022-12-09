@@ -1,34 +1,21 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
+import { Box, Button, Stack } from "@mui/material";
+import { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
-
 import { fetchCategories } from "../utilities/api";
-import Reviews from "./Reviews";
 import { formatCat } from "../utilities/util";
-
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 export default function Categories() {
   const [fetchedCats, setFetchedCats] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+
   useEffect(() => {
-    fetchCategories().then((cats) => {
-      setFetchedCats(cats);
-      setIsLoading(false);
-    });
+    fetchCategories()
+      .then((cats) => {
+        setFetchedCats(cats);
+        setIsLoading(false);
+      })
   }, []);
 
   if (isLoading) {
@@ -56,10 +43,7 @@ export default function Categories() {
           {fetchedCats.map((category, index) => {
             return (
               <Link key={index} to={`/reviews?category=${category.slug}`}>
-                <Button
-                  value={category.slug}
-                  variant="contained"
-                >
+                <Button value={category.slug} variant="contained">
                   {formatCat(category.slug)}
                 </Button>
               </Link>

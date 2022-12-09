@@ -1,21 +1,22 @@
 import * as React from "react";
-import { useState, useEffect, useContext } from "react";
-
-import Comment from "./Comment";
-import { fetchComments, postComment } from "../utilities/api";
-import { UserContext } from "../utilities/contexts";
 
 import {
+  Alert,
+  Box,
+  Button,
   Dialog,
-  TextareaAutosize,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Button,
-  Box,
-  Alert,
+  TextField,
+  TextareaAutosize,
 } from "@mui/material";
+import { fetchComments, postComment } from "../utilities/api";
+import { useContext, useEffect, useState } from "react";
+
 import AddCommentIcon from "@mui/icons-material/AddComment";
+import Comment from "./Comment";
+import { UserContext } from "../utilities/contexts";
 
 export default function Comments({ review_id }) {
   const { user } = useContext(UserContext);
@@ -86,7 +87,9 @@ export default function Comments({ review_id }) {
               autoComplete="off"
             >
               <div>
-                <TextareaAutosize
+                <TextField
+                  multiline
+                  rows={4}
                   required
                   id="outlined-required"
                   label="Required"
