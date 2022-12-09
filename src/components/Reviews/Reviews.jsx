@@ -16,7 +16,9 @@ import { useEffect, useState } from "react";
 
 import FilterListIcon from "@mui/icons-material/FilterList";
 import ReviewCard from "./ReviewCard";
+import { UserContext } from "../../utilities/contexts";
 import { fetchReviews } from "../../utilities/api";
+import { useContext } from "react";
 
 export default function Reviews() {
   const [fetchedReviews, setFetchedReviews] = useState([]);

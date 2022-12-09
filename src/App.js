@@ -14,6 +14,7 @@ import Nav from "./components/Nav";
 import Profile from "./components/Profile";
 import ReviewDetails from "./components/Reviews/ReviewDetails";
 import Reviews from "./components/Reviews/Reviews";
+import SignIn from "./components/SignIn";
 import { UserContext } from "./utilities/contexts";
 import { appTheme } from "./utilities/theme";
 import { useState } from "react";
@@ -35,9 +36,11 @@ function App() {
             <div className="App">
               <Nav />
               <Routes>
+                <Route path="/" element={<Home />} />
                 <Route path="/api" element={<Home />} />
                 <Route path="/api/about" element={<About />} />
                 <Route path="/api/profile" element={<Profile />} />
+                <Route path="/api/sign-in" element={<SignIn />} />
                 <Route path="/api/reviews" element={<Reviews />} />
                 <Route path="/api/categories" element={<Categories />} />
                 <Route
@@ -46,7 +49,8 @@ function App() {
                 />
                 <Route path=":pathcategory" element={<FilteredReviews />} />
                 <Route path="/error" element={<ErrorPage />} />
-                <Route path="*" element={<ErrorPage />} />
+                <Route path="/*" element={<ErrorPage />} />
+                <Route path="" element={<ErrorPage />} />
               </Routes>
             </div>
           </UserContext.Provider>

@@ -17,7 +17,7 @@ import trLogo from "../assets/DF-logo-trans.png";
 import { useState } from "react";
 
 const pages = ["Reviews", "Categories", "About"];
-const settings = ["Profile", "Logout"];
+const settings = ["Profile", "Sign-in"];
 
 function Nav() {
   const [anchorElNav, setAnchorElNav] = useState(null);
