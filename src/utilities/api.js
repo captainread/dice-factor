@@ -81,7 +81,6 @@ export const postComment = (review_id, body, username) => {
 
 export const deleteComment = (comment_id) => {
   return diceFactorAPI.delete(`/comments/${comment_id}`).then(({ data }) => {
-    console.log(data);
     return data;
   });
-}
+};

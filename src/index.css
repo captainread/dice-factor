@@ -21,8 +21,6 @@ a {
 }
 
 #logo {
-  /* max-width: 100px;
-  height: auto; */
   margin: auto;
   text-align: center;
   max-width: 100%;
@@ -42,7 +40,6 @@ a {
   background-color: white;
   border-radius: 20px;
   min-height: 300px;
-  /* max-height: 400px; */
   max-height: 50vh;
   padding: 1rem;
   background-size: cover;
@@ -56,7 +53,6 @@ a {
   border-radius: 20px;
   font-size: 8vw;
   font-weight: bold;
-  /* margin: 0 auto; */
   padding: 10px;
   mix-blend-mode: hard-light;
   text-transform: uppercase;
@@ -74,7 +70,6 @@ a {
 }
 
 #all-reviews {
-  /* background-color: gold; */
   overflow: auto;
   align-items: center;
   text-align: center;
@@ -96,7 +91,6 @@ a {
 }
 
 .review-card {
-  /* height: 10%; */
   overflow: auto;
 }
 
@@ -130,9 +124,7 @@ a {
 }
 
 #review-details-header {
-  /* background: palevioletred; */
   overflow: auto;
-  /* position: fixed; */
 }
 
 #review-details-owner {
@@ -171,13 +163,10 @@ a {
 }
 
 #comments-section {
-  /* border: 1px solid black; */
-  /* background-color: aqua; */
   margin-top: 2rem;
 }
 
 #comments-header {
-  /* background-color: pink; */
   height: 50px;
 }
 
@@ -188,12 +177,6 @@ a {
 
 .comments-add-btn {
   float: right;
-}
-
-#comments-block {
-  /* overflow: auto; */
-  /* background-color: blueviolet; */
-  /* background-color: yellow; */
 }
 
 .comments-card {
@@ -220,4 +203,8 @@ a {
     width: 0;
     height: 0;
   }
+}
+
+#error-page {
+  padding: 1rem;
 }

@@ -1,19 +1,22 @@
 import "./index.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import * as React from "react";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
+
+import About from "./components/About";
+import Categories from "./components/Categories";
+import ErrorPage from "./components/ErrorPage";
+import FilteredReviews from "./components/Reviews/FilteredReviews";
+import Home from "./components/Home";
+import Nav from "./components/Nav";
+import Profile from "./components/Profile";
+import ReviewDetails from "./components/Reviews/ReviewDetails";
+import Reviews from "./components/Reviews/Reviews";
+import { UserContext } from "./utilities/contexts";
 import { appTheme } from "./utilities/theme";
 import { useState } from "react";
-
-import { UserContext } from "./utilities/contexts";
-
-import Nav from "./components/Nav";
-import Home from "./components/Home";
-import Reviews from "./components/Reviews";
-import ReviewDetails from "./components/ReviewDetails";
-import Categories from "./components/Categories";
-import FilteredReviews from "./components/FilteredReviews";
-import About from "./components/About";
 
 function App() {
   const [user, setUser] = useState({
@@ -32,8 +35,9 @@ function App() {
             <div className="App">
               <Nav />
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/api/About" element={<About />} />
+                <Route path="/api" element={<Home />} />
+                <Route path="/api/about" element={<About />} />
+                <Route path="/api/profile" element={<Profile />} />
                 <Route path="/api/reviews" element={<Reviews />} />
                 <Route path="/api/categories" element={<Categories />} />
                 <Route
@@ -41,7 +45,8 @@ function App() {
                   element={<ReviewDetails />}
                 />
                 <Route path=":pathcategory" element={<FilteredReviews />} />
-                <Route path="*" element={<p>Error: path not resolved</p>} />
+                <Route path="/error" element={<ErrorPage />} />
+                <Route path="*" element={<ErrorPage />} />
               </Routes>
             </div>
           </UserContext.Provider>

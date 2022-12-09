@@ -1,5 +1,5 @@
 import Highlight from "./Highlight";
-import Reviews from "./Reviews";
+import Reviews from "./Reviews/Reviews";
 
 export default function Home() {
   return (
