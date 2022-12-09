@@ -15,7 +15,6 @@ import Select from "@mui/material/Select";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
 
 import { fetchReviews } from "../utilities/api";
 import ReviewCard from "./ReviewCard";
@@ -26,10 +25,8 @@ export default function Reviews() {
   const [sortType, setSortType] = useState("created_at");
   const [sortOrder, setSortOrder] = useState("desc");
 
-  let searchParams = { sort_by: sortType, order: sortOrder };
-
   useEffect(() => {
-    fetchReviews(searchParams).then((reviews) => {
+    fetchReviews(sortType, sortOrder).then((reviews) => {
       setFetchedReviews(reviews);
       setIsLoading(false);
     });
@@ -73,8 +70,8 @@ export default function Reviews() {
               label="Sort By"
               onChange={handleChange}
             >
-              <MenuItem value={"votes"}>Votes</MenuItem>
               <MenuItem value={"created_at"}>Date</MenuItem>
+              <MenuItem value={"votes"}>Votes</MenuItem>
               <MenuItem value={"comment_count"}>Comments</MenuItem>
             </Select>
           </FormControl>

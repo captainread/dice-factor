@@ -4,9 +4,9 @@ const diceFactorAPI = axios.create({
   baseURL: "https://dicefactor.cyclic.app/api",
 });
 
-export const fetchReviews = (searchParams) => {
+export const fetchReviews = (sortType, sortOrder) => {
   return diceFactorAPI
-    .get(`/reviews`, { params: searchParams })
+    .get(`/reviews`, { params: { sort_by: sortType, order: sortOrder } })
     .then(({ data }) => {
       return data.review;
     });
@@ -18,10 +18,14 @@ export const fetchReviewByID = (review_id) => {
   });
 };
 
-export const fetchReviewsByCategory = (category) => {
-  return diceFactorAPI.get(`/reviews?category=${category}`).then(({ data }) => {
-    return data.review;
-  });
+export const fetchReviewsByCategory = (category, sortType, sortOrder) => {
+  return diceFactorAPI
+    .get(`/reviews?category=${category}`, {
+      params: { sort_by: sortType, order: sortOrder },
+    })
+    .then(({ data }) => {
+      return data.review;
+    });
 };
 
 export const fetchComments = (review_id) => {
