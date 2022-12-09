@@ -35,6 +35,7 @@ function App() {
             <div className="App">
               <Nav />
               <Routes>
+                <Route path="/" element={<Home />} />
                 <Route path="/api" element={<Home />} />
                 <Route path="/api/about" element={<About />} />
                 <Route path="/api/profile" element={<Profile />} />
@@ -46,7 +47,8 @@ function App() {
                 />
                 <Route path=":pathcategory" element={<FilteredReviews />} />
                 <Route path="/error" element={<ErrorPage />} />
-                <Route path="*" element={<ErrorPage />} />
+                <Route path="/*" element={<ErrorPage />} />
+                <Route path="" element={<ErrorPage />} />
               </Routes>
             </div>
           </UserContext.Provider>
