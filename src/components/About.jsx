@@ -1,5 +1,3 @@
-import Sort from "./Sort";
-
 export default function About() {
-  return <Sort />;
+  return <p>Blank page :D</p>;
 }
