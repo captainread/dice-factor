@@ -16,7 +16,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import trLogo from "../assets/DF-logo-trans.png";
 import { useState } from "react";
 
-const pages = ["Reviews", "Categories", "About"];
+const pages = ["Reviews", "Categories"];
 const settings = ["Profile", "Sign-in"];
 
 function Nav() {

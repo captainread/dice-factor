@@ -5,7 +5,6 @@ import * as React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 
-import About from "./components/About";
 import Categories from "./components/Categories";
 import ErrorPage from "./components/ErrorPage";
 import FilteredReviews from "./components/Reviews/FilteredReviews";
@@ -23,12 +22,11 @@ function App() {
   const [user, setUser] = useState({
     username: "grumpy19",
     name: "Paul Grump",
-    avatar_url:
-      "https://vignette.wikia.nocookie.net/mrmen/images/7/78/Mr-Grumpy-3A.PNG/revision/latest?cb=20170707233013",
+    avatar_url: "https://vignette.wikia.nocookie.net/mrmen/images/7/78/Mr-Grumpy-3A.PNG/revision/latest?cb=20170707233013",
   });
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={"/dice-factor"}>
       <React.Fragment>
         <ThemeProvider theme={appTheme}>
           <CssBaseline enableColorScheme />
@@ -38,15 +36,11 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/api" element={<Home />} />
-                <Route path="/api/about" element={<About />} />
                 <Route path="/api/profile" element={<Profile />} />
                 <Route path="/api/sign-in" element={<SignIn />} />
                 <Route path="/api/reviews" element={<Reviews />} />
                 <Route path="/api/categories" element={<Categories />} />
-                <Route
-                  path="/api/reviews/:review_id"
-                  element={<ReviewDetails />}
-                />
+                <Route path="/api/reviews/:review_id" element={<ReviewDetails />} />
                 <Route path=":pathcategory" element={<FilteredReviews />} />
                 <Route path="/error" element={<ErrorPage />} />
                 <Route path="/*" element={<ErrorPage />} />

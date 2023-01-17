@@ -1,10 +1,10 @@
-# Dice Factor (NC Games API)
+# Dice Factor
 
 ### Hosted site
 
 To view the live version, please visit:
 
-> https://dicefactor.netlify.app/
+> https://captainread.github.io/dice-factor/
 
 ## Project summary
 

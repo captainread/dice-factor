@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -43,11 +45,12 @@ a {
   text-align: center;
   display: inline-block;
   padding: 1rem;
-}
-#all-reviews h2 {
-  margin: 0;
-  padding-right: 2rem;
-  float: left;
+
+  h2 {
+    margin: 0;
+    padding-right: 2rem;
+    float: left;
+  }
 }
 
 #filter-tip {
@@ -56,9 +59,10 @@ a {
 
 .review-card {
   overflow: auto;
-}
-.review-card img {
-  height: 100px;
+
+  img {
+    height: 100px;
+  }
 }
 
 .review-card .read-more {
@@ -88,9 +92,10 @@ a {
 
 #review-details-header {
   overflow: auto;
-}
-#review-details-header h3 {
-  float: right;
+
+  h3 {
+    float: right;
+  }
 }
 
 #review-details-owner {
@@ -101,12 +106,13 @@ a {
   text-align: left;
   line-height: 1.5rem;
   overflow: auto;
-}
-#review-details-body img {
-  margin: auto;
-  display: block;
-  width: 100%;
-  max-width: 800px;
+
+  img {
+    margin: auto;
+    display: block;
+    width: 100%;
+    max-width: 800px;
+  }
 }
 
 #review-details-game {
@@ -125,10 +131,10 @@ a {
 
 #comments-section {
   margin-top: 2rem;
-}
-#comments-section h1 {
-  margin: 0;
-  float: left;
+  h1 {
+    margin: 0;
+    float: left;
+  }
 }
 
 #comments-header {
@@ -141,10 +147,11 @@ a {
 
 .comments-card {
   margin: 0.5rem;
-}
-.comments-card h4 {
-  margin: 0;
-  float: left;
+
+  h4 {
+    margin: 0;
+    float: left;
+  }
 }
 
 #categories-header {
@@ -163,6 +170,7 @@ a {
     height: 0;
   }
 }
+
 #error-page {
   padding: 1rem;
-}/*# sourceMappingURL=index.css.map */
+}

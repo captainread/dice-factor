@@ -7,7 +7,7 @@ export default function SignIn() {
   const { user, setUser } = useContext(UserContext);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(user);
-  const [showMessage] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -27,7 +27,7 @@ export default function SignIn() {
   }
 
   const userMessage = () => {
-    if (user) {
+    if (showMessage) {
       return <h2>Welcome back, {user}.</h2>;
     } else {
       return <h2>Please sign in:</h2>;
@@ -39,11 +39,11 @@ export default function SignIn() {
       {userMessage()}
       <div id="user-drop-down">
         <select
+          defaultValue={"default"}
           onChange={(event) => {
             setSelectedUser(event.target.value);
-          }}
-        >
-          <option selected={true} disabled="disabled">
+          }}>
+          <option value="default" disabled="disabled">
             Select user
           </option>
           {users.map(({ username }) => {
@@ -58,9 +58,8 @@ export default function SignIn() {
           id="user-drop-down-btn"
           onClick={() => {
             setUser(selectedUser);
-            showMessage(true);
-          }}
-        >
+            setShowMessage(true);
+          }}>
           Sign in
         </button>
       </div>
