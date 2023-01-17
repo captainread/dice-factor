@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/dice-factor/static/css/main.d20d83f7.css",
-    "main.js": "/dice-factor/static/js/main.d88300ec.js",
+    "main.js": "/dice-factor/static/js/main.ae9090ec.js",
     "static/media/DF-logo-trans.png": "/dice-factor/static/media/DF-logo-trans.f4c575583ef61e589427.png",
     "index.html": "/dice-factor/index.html",
     "main.d20d83f7.css.map": "/dice-factor/static/css/main.d20d83f7.css.map",
-    "main.d88300ec.js.map": "/dice-factor/static/js/main.d88300ec.js.map"
+    "main.ae9090ec.js.map": "/dice-factor/static/js/main.ae9090ec.js.map"
   },
   "entrypoints": [
     "static/css/main.d20d83f7.css",
-    "static/js/main.d88300ec.js"
+    "static/js/main.ae9090ec.js"
   ]
 }
