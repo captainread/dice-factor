@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/dice-factor/static/css/main.d20d83f7.css",
-    "main.js": "/dice-factor/static/js/main.f6a50f1d.js",
-    "static/media/DF-logo-trans.png": "/dice-factor/static/media/DF-logo-trans.f4c575583ef61e589427.png",
-    "index.html": "/dice-factor/index.html",
-    "main.d20d83f7.css.map": "/dice-factor/static/css/main.d20d83f7.css.map",
-    "main.f6a50f1d.js.map": "/dice-factor/static/js/main.f6a50f1d.js.map"
+    "main.css": "/static/css/main.d20d83f7.css",
+    "main.js": "/static/js/main.5b693d88.js",
+    "static/media/DF-logo-trans.png": "/static/media/DF-logo-trans.f4c575583ef61e589427.png",
+    "index.html": "/index.html",
+    "main.d20d83f7.css.map": "/static/css/main.d20d83f7.css.map",
+    "main.5b693d88.js.map": "/static/js/main.5b693d88.js.map"
   },
   "entrypoints": [
     "static/css/main.d20d83f7.css",
-    "static/js/main.f6a50f1d.js"
+    "static/js/main.5b693d88.js"
   ]
 }
