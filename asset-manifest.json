@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/api/static/css/main.d20d83f7.css",
-    "main.js": "/api/static/js/main.9bd9c4b2.js",
-    "static/media/DF-logo-trans.png": "/api/static/media/DF-logo-trans.f4c575583ef61e589427.png",
-    "index.html": "/api/index.html",
-    "main.d20d83f7.css.map": "/api/static/css/main.d20d83f7.css.map",
-    "main.9bd9c4b2.js.map": "/api/static/js/main.9bd9c4b2.js.map"
+    "main.css": "/dice-factor/static/css/main.d20d83f7.css",
+    "main.js": "/dice-factor/static/js/main.f6a50f1d.js",
+    "static/media/DF-logo-trans.png": "/dice-factor/static/media/DF-logo-trans.f4c575583ef61e589427.png",
+    "index.html": "/dice-factor/index.html",
+    "main.d20d83f7.css.map": "/dice-factor/static/css/main.d20d83f7.css.map",
+    "main.f6a50f1d.js.map": "/dice-factor/static/js/main.f6a50f1d.js.map"
   },
   "entrypoints": [
     "static/css/main.d20d83f7.css",
-    "static/js/main.9bd9c4b2.js"
+    "static/js/main.f6a50f1d.js"
   ]
 }
